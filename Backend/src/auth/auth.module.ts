@@ -14,6 +14,8 @@ import { PassportModule } from "@nestjs/passport";
 import { JwtAuthService } from "./services/jwt-auth.service";
 import { JwtModule } from "@nestjs/jwt/dist";
 import { JwtStrategy } from "./strategies/jwt.strategy";
+import { RolController } from './controllers/rol.controller';
+import { RolUsuarioController } from './controllers/rol-usuario.controller';
 
 const ms = require("ms")
 
@@ -50,7 +52,7 @@ const ms = require("ms")
 		JwtStrategy,
 		JwtAuthService
 	],
-	controllers: [UsuarioController, AuthController],
+	controllers: [UsuarioController, AuthController, RolController, RolUsuarioController],
 	exports: [
 		UsuarioService, 
 		LocalAuthService, 

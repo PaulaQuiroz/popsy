@@ -4,9 +4,11 @@ import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { JwtAuthService } from '../services/jwt-auth.service';
 import * as moment from "moment";
+import { ApiTags } from '@nestjs/swagger';
 
 const ms = require("ms");
 
+@ApiTags("auth")
 @Controller('auth')
 export class AuthController {
     constructor(
@@ -21,7 +23,11 @@ export class AuthController {
         const oAuth = await this.getAuthJwt(req.user);
 
         res.cookie("token", oAuth.token, {
-            expires: oAuth.expireDate
+            expires: oAuth.expireDate,
+            sameSite: "none",
+            httpOnly: false,
+            secure: false,
+            domain:"*"
         });
 
         res.json({

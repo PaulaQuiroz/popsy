@@ -20,6 +20,7 @@ import { DetallePedidoDialogComponent } from './detalle-pedido-dialog/detalle-pe
 import {MatDialogModule} from "@angular/material/dialog";
 import { LoginComponent } from './login/login.component';
 import { CreateUserComponent } from './createUser/create-user/create-user.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { CreateUserComponent } from './createUser/create-user/create-user.compon
         ListaPedidosComponent,
         DetallePedidoDialogComponent,
         LoginComponent,
-        CreateUserComponent
+        CreateUserComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,

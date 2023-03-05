@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { DistritoDto } from "../dto/distrito.dto";
 import { UsuarioPuntoVentaService } from "../services/usuario-punto-venta.service";
-import { UsuarioPuntoVentaDto } from "../dto/usuario-punto-venta.dto";
+import { UsuarioPuntoVentaDto, UsuarioPuntoVentaMasivoDto } from "../dto/usuario-punto-venta.dto";
 import { ApiTags } from "@nestjs/swagger";
 
 @ApiTags("usuario-punto-venta")
@@ -24,6 +24,20 @@ export class UsuarioPuntoVentaController {
 	@Post("")
 	async save(@Body() dto: UsuarioPuntoVentaDto) {
 		return this.iUsuarioPuntoVentaService.save(dto);
+	}
+
+	@Post("masivo")
+	async saveMasivo(@Body() dto: UsuarioPuntoVentaMasivoDto) {
+		let result = [];
+		
+		for(let i = 0; i < dto.puntosVentaId.length; i++){
+			result.push(await this.iUsuarioPuntoVentaService.save({
+				usuarioId: dto.usuarioId,
+				puntoVentaId: dto.puntosVentaId[i]
+			}));
+		}
+
+		return result;
 	}
 
 	@Put(":id")

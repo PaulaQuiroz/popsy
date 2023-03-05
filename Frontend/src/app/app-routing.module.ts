@@ -6,8 +6,14 @@ import {AuthGuard} from "./login/auth.guard";
 import { LoginComponent } from './login/login.component';
 import { CreateUserComponent } from './createUser/create-user/create-user.component';
 import { NoAuthGuard } from './login/no-auth.guard';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+    {
+        path: "",
+        component: HomeComponent,
+        canActivate: [AuthGuard]
+    },
     {
         path: "login",
         component: LoginComponent,

@@ -18,7 +18,10 @@ export class AuthenticationService {
     public login(auth: {correo: string, password: string}, callbackError: any): void {
         this.backendService.postRequest("auth/login", auth)
         .then((oResult: any) => {
-            localStorage.setItem(this.tokenKey, oResult.token);
+            if(window.location.origin.includes("localhost")){
+                localStorage.setItem(this.tokenKey, oResult.token);
+            }
+            
             this.router.navigate(['/pedidos']).then();
         }).catch((oError) => callbackError(oError));
     }
@@ -39,8 +42,13 @@ export class AuthenticationService {
     }
 
     public isLoggedIn(): boolean {
-        let token = localStorage.getItem(this.tokenKey);
-        return token != null && token.length > 0;
+        if(window.location.origin.includes("localhost")){
+            let token = localStorage.getItem(this.tokenKey);
+
+            return token != null && token.length > 0;
+        } else {
+            return document.cookie.includes("token");
+        }
     }
 
     public getToken(): string | null {

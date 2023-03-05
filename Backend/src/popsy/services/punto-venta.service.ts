@@ -23,6 +23,16 @@ export class PuntoVentaService {
 		});
 	}
 
+	async getByDistrito(idDistrito: string): Promise<PuntoVentaEntity[]> {
+		return await this.iPuntoVentaRepository.find({
+			where: {
+				distrito: {
+					id: idDistrito
+				}
+			}
+		});
+	}
+
 	async save(dto: PuntoVentaDto): Promise<PuntoVentaEntity> {
 		return await this.iPuntoVentaRepository.save(await this.getData(dto));
 	}

@@ -59,37 +59,44 @@ export class ListaPedidosComponent {
         this.optionsMenu.push({
             menuId: 1,
             title: "Configuración",
+            callback: () => {}
             /* No sé agre la propiedad iconUrl porque no se va a utilizar en esta etapa, si se requiere se debe agregar una url válida*/
         });
 
         this.optionsMenu.push({
             menuId: 2,
             title: "Pedidos",
+            callback: () => {}
         });
 
         this.optionsMenu.push({
             menuId: 3,
             title: "Inventarios",
+            callback: () => {}
         });
 
         this.optionsMenu.push({
             menuId: 4,
             title: "Traslados",
+            callback: () => {}
         });
 
         this.optionsMenu.push({
             menuId: 5,
             title: "Deterioros",
+            callback: () => {}
         });
 
         this.optionsMenu.push({
             menuId: 6,
             title: "Compras",
+            callback: () => {}
         });
 
         this.optionsMenu.push({
             menuId: 7,
             title: "Aprobaciones",
+            callback: () => {}
         });
 
         this.getCategorias();

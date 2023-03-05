@@ -16,6 +16,11 @@ export class PuntoVentaController {
 		return this.iPuntoVentaService.getAll();
 	}
 
+	@Get("distrito/:idDistrito")
+	async getByDistrito(@Param("idDistrito") idDistrito: string) {
+		return this.iPuntoVentaService.getByDistrito(idDistrito);
+	}
+
 	@Get(":id")
 	async getById(@Param("id") id: string) {
 		return this.iPuntoVentaService.getById(id);

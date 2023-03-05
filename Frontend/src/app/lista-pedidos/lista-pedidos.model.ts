@@ -6,6 +6,8 @@ export interface IMenuOption {
     title: string
 
     count?: number
+
+    callback: any
 }
 
 export interface ICategoriaMenu {
