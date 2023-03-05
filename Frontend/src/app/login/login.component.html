@@ -1,0 +1,33 @@
+<body>
+    <img src=".././../assets/img/bg-back.jpg" 
+    style="position: absolute; margin:0; right: 0; top: 0; z-index: -90; opacity: 0.95">
+
+    <div class="login">
+        <form class="custom-form" [formGroup]="formLogin" (ngSubmit)="login($event)">
+                 <h1>Bienvenido</h1>
+          <div class="logo">
+          <img src=".././../assets/logos/logo.png">
+          </div>
+          <input
+            type="email"
+            formControlName="correo"
+            name="email"
+            placeholder="Usuario"
+            required="required"
+          />
+          <input
+            type="password"
+            formControlName="password"
+            name="password"
+            placeholder="Contraseña"
+            required="required"
+          />
+          <button type="submit">Ingresar</button>
+          <div>
+            <img src=".././../assets/img/products.png" alt="">
+          </div> 
+        </form>
+      
+      </div>
+      
+    </body>

@@ -1,0 +1,58 @@
+<!-- form user session info -->
+<section>
+    <form class="flex flex-row m-4 p-4" >
+        <mat-form-field appearance="fill" class="md:mx-2">
+            <mat-label>Fecha</mat-label>
+            <input matInput [value]="_fechaSistema" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="md:mx-2">
+            <mat-label>Usuario</mat-label>
+            <input matInput [value]="_oUserSession.nombres + ' ' + _oUserSession.apellidos" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="md:mx-2">
+            <mat-label>Punto de venta</mat-label>
+            <input matInput [value]="_oUserSession.oPuntoVenta.nombre" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="md:mx-2">
+            <mat-label>Tipo Pedido</mat-label>
+            <mat-select required disabled [value]="_tipoPedidoId">
+                <mat-option *ngFor="let tipoPedido of tipoPedidoOptions" [value]="tipoPedido.id" >
+                    {{tipoPedido.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-button mat-raised-button 
+            color="accent" 
+            (click)="guardarPedido()"
+            class="" 
+            type="button">
+            Enviar
+        </button>
+    </form>
+</section>
+
+<!-- summary -->
+<section class="">
+    <table mat-table [dataSource]="oDatasource" class="mat-elevation-z8">
+        <ng-container matColumnDef="nombreProducto">
+            <th mat-header-cell *matHeaderCellDef class="font-semibold bg-[#b60050] text-white">
+                Producto (Nombre)
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidadSolicitada" class="max-w-2 w-2">
+            <th mat-header-cell *matHeaderCellDef class="font-semibold bg-[#b60050] text-white">Cantidad Solicitada</th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="oColumnsTable"></tr>
+        <tr mat-row *matRowDef="let row; columns: oColumnsTable;"></tr>
+    </table>
+</section>
+
+

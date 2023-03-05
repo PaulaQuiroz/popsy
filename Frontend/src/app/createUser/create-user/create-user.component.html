@@ -1,0 +1,73 @@
+
+
+<div>
+<img src=".././../assets/img/bg-back.jpg" 
+style="position: absolute; margin:0; right: 0; top: 0; z-index: -90; opacity: 0.95">
+  
+
+<div class="register">
+    <form class="custom-form" method="post">
+      <h1>Creación de Usuario</h1>
+      <div class="logo">
+        <img src=".././../assets/logos/logo.png">
+        </div>
+      <input
+        type="Nombre"
+        
+        name="Nombre"
+        placeholder="nombres"
+        required="required"
+      />
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="Email o Usuario"
+        required="required"
+      />
+      <input
+        type="string"
+   
+        name="rol"
+        placeholder="rol"
+        required="required"
+      />
+      <input
+        type="string"
+   
+        name="Punto de Venta"
+        placeholder="Punto de Venta"
+        required="required"
+      />
+      <input
+        type="string"
+   
+        name="Distrito"
+        placeholder="dstrito"
+        required="required"
+      />
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Password"
+        required="required"
+      />
+      
+      <input
+        type="password"
+        [(ngModel)]="confirmPassword"
+        name="password"
+        placeholder="Repeat the password"
+        required="required"
+      />
+      <button type="submit">Crear Usuario</button>
+      <div>
+        <img src=".././../assets/img/products.png" alt="">
+      </div>
+    </form>
+   
+  </div>
+
+</div>
+

@@ -1,0 +1,27 @@
+.w-full-form {
+    width: calc(100% - 2rem)!important;
+}
+
+.flex-inline-list > span {
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: space-between;
+}
+
+.flex-inline-list > span > span {
+    position: fixed;
+    width: 0;
+    height: 0;
+    z-index: -1000;
+}
+
+@media (min-width: 1024px) {
+    .w-full-form {
+        width: calc(100% - 288px);
+    }
+
+    .w-table-scroll {
+        width: calc(100vw - 320px)!important;
+        max-width: calc(100vw - 320px)!important;
+    }
+}

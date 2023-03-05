@@ -1,0 +1,158 @@
+<!-- Navbar -->
+<nav class="bg-[#b60050] max-w-[100vw] overflow-x-hidden">
+    <div class="w-[96vw] lg:flex lg:justify-between lg:items-center">
+        <div class="mx-4 flex justify-between items-center mb-8 w-auto lg:my-4">
+            <!-- Logo -->
+            <div class="py-4 w-[25%] md:w-[15%] pt-2 lg:w-28 lg:my-auto lg:h-auto">
+                <img src="./assets/logos/logo-white.png" alt="">
+            </div>
+
+            <!-- Menu Icon -->
+            <button *ngIf="!deviceIsDesktop" [class]="'text-white scale-150 ' + (phoneMenuShow ? 'fixed z-[-1]' : '')"
+                    (click)="phoneMenuShow = !phoneMenuShow">
+                <fa-icon [icon]="faBars"></fa-icon>
+            </button>
+
+            <!-- Menu Icon -->
+            <button *ngIf="!deviceIsDesktop" [class]="'text-white scale-150 '  + (phoneMenuShow ? '' : 'fixed z-[-1]')"
+                    (click)="phoneMenuShow = !phoneMenuShow">
+                <fa-icon [icon]="faXmark"></fa-icon>
+            </button>
+        </div>
+
+        <div *ngIf="deviceIsDesktop" class="text-white">
+            <ul class="flex">
+                <li class="py-4 transition ease-in-out delay-150 hover:scale-105 hover:bg-gray-900/[.5] max-w-[97.5vw] cursor-pointer"
+                    *ngFor="let optionMenu of optionsMenu; let i=index;">
+                <span class="text-xl mx-4 md:text-xl">
+                    {{optionMenu.title}}
+                </span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="text-white max-w-[100vw]" *ngIf="phoneMenuShow && !deviceIsDesktop">
+            <ul>
+                <li class="py-4 transition ease-in-out delay-150 hover:scale-105 hover:bg-gray-900/[.5] max-w-[97.5vw] cursor-pointer "
+                    *ngFor="let optionMenu of optionsMenu; let i=index;">
+                <span class="text-xl ml-8 md:text-3xl">
+                    {{optionMenu.title}}
+                </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="lg:flex max-w-[100vw] overflow-x-hidden">
+    <aside class="fixed z-10 flex lg:relative lg:max-w-[307px] lg:min-h-[83vh]">
+        <!-- CONTENT -->
+        <mat-list [class]="(categoriasMenuShow || deviceIsDesktop? '' : 'sticky left-[-10000] hidden') +
+        ' bg-[#b60050] w-[60vw] md:w-[40vw] lg:w-[20vw] transition-all ease-in-out delay-150 duration-1000 p-0 lg:max-w-[307px]'">
+            <div mat-subheader class="text-white text-xl font-medium text-center">Categorias</div>
+            <mat-list-item [class]="(categoriaMenu.categoriaId == _selectCategoria?.categoriaId ? 'bg-gray-900/[.5]' : '')
+             + ' cursor-pointer hover:bg-gray-900/[.5] flex-inline-list'"
+                           *ngFor="let categoriaMenu of categoriasMenu"
+                            (click)="_selectCategoria=categoriaMenu;getProductoByCategoria(categoriaMenu);">
+                <div matListItemTitle class="text-white">{{categoriaMenu.title}}</div>
+                <div matListItemLine class="text-white mt-2 inline-table">({{categoriaMenu.oProductSelect.length}}/{{categoriaMenu.count}})</div>
+            </mat-list-item>
+        </mat-list>
+        <!-- ICON -->
+        <button *ngIf="!phoneMenuShow && !categoriasMenuShow && !deviceIsDesktop"
+                class="px-2 py-1 bg-[#b60050] ml-2 text-white scale-[2] h-[26px] mt-[12.5px]"
+                (click)="categoriasMenuShow = !categoriasMenuShow; phoneMenuShow = false;">
+            <fa-icon [icon]="faAnglesRight"></fa-icon>
+        </button>
+
+        <button *ngIf="!phoneMenuShow && categoriasMenuShow && !deviceIsDesktop"
+                class="px-2 py-1 bg-[#b60050] ml-2 text-white scale-[2] h-[26px] mt-[12.5px]"
+                (click)="categoriasMenuShow = !categoriasMenuShow; phoneMenuShow = false;">
+            <fa-icon [icon]="faAnglesLeft"></fa-icon>
+        </button>
+    </aside>
+    <div>
+        <section [class]="(categoriasMenuShow ? 'opacity-20 ' : '') + ' lg:mt-4'">
+            <div class="block ml-8 w-full-form lg:m-0">
+                <form class="w-[70%] mx-auto md:w-[80%] md:flex md:justify-center" [formGroup]="oUserInfoGroup">
+                    <mat-form-field appearance="fill" class="md:mx-2">
+                        <mat-label>Fecha</mat-label>
+                        <input matInput [value]="_fechaSistema" disabled />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="md:mx-2">
+                        <mat-label>Usuario</mat-label>
+                        <input matInput [value]="_oUserSession.nombres + ' ' + _oUserSession.apellidos" disabled />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="md:mx-2">
+                        <mat-label>Punto de venta</mat-label>
+                        <input matInput [value]="_oUserSession.oPuntoVenta.nombre" disabled />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="md:mx-2">
+                        <mat-label>Tipo Pedido</mat-label>
+                        <mat-select formControlName="tipoPedido" required >
+                            <mat-option *ngFor="let tipoPedido of tipoPedidoOptions" [value]="tipoPedido.id">
+                                {{tipoPedido.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </form>
+            </div>
+        </section>
+        <!-- Tabla -->
+        <section class=" max-w-[99vw] w-[99vw] w-table-scroll overflow-x-scroll">
+            <table mat-table [dataSource]="oDataTable" class="mat-elevation-z8">
+                <ng-container matColumnDef="nombreProducto">
+                    <th mat-header-cell *matHeaderCellDef class="font-semibold bg-[#b60050] text-white">
+                        Producto (Nombre)
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.producto.nombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="presentacion">
+                    <th mat-header-cell *matHeaderCellDef class="font-semibold bg-[#b60050] text-white">Presentación</th>
+                    <td mat-cell *matCellDef="let element"> {{element.producto.presentacion}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stockActual">
+                    <th mat-header-cell *matHeaderCellDef class="font-semibold bg-[#b60050] text-white">Stock Actual</th>
+                    <td mat-cell *matCellDef="let element"> {{element.stockActual}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stockTransito">
+                    <th mat-header-cell *matHeaderCellDef class="font-semibold bg-[#b60050] text-white">Stock en transito</th>
+                    <td mat-cell *matCellDef="let element"> {{element.stockTransito}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cantidadSugerida">
+                    <th mat-header-cell *matHeaderCellDef class="font-semibold bg-[#b60050] text-white">Cantidad Sugerida</th>
+                    <td mat-cell *matCellDef="let element"> {{element.cantidadProductoMaxima - element.stockActual - element.stockTransito}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cantidadSolicitada" class="max-w-2 w-2">
+                    <th mat-header-cell *matHeaderCellDef class="font-semibold pr-0 w-2 bg-[#b60050] text-white">Cantidad Solicitada</th>
+                    <td mat-cell *matCellDef="let element" class="pr-0">
+                        <mat-form-field appearance="fill" class="md:mx-2">
+                            <mat-label></mat-label>
+                            <input matInput
+                                   type="number"
+                                   [max]="element.cantidadProductoMaxima - element.stockActual - element.stockTransito"
+                                   [min]="0"
+                                   (change)="onChangeCantidadSolicitada($event, element)"
+                                   [value]="'0'" />
+                        </mat-form-field>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="oColumnsTable"></tr>
+                <tr mat-row *matRowDef="let row; columns: oColumnsTable;"></tr>
+            </table>
+        </section>
+    </div>
+</div>
+
+<button mat-fab color="primary" class="fixed bottom-10 right-10 z-10 scale-150"
+    (click)="resumenPedido()">
+    <mat-icon>save</mat-icon>
+</button>
