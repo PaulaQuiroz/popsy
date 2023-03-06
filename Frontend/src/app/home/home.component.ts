@@ -17,16 +17,6 @@ export class HomeComponent {
   protected phoneMenuShow = false;
   protected readonly optionsMenu: IMenuOption[] = [];
   protected readonly deviceIsDesktop;
-  protected readonly _oUserSession:IUserSession = {
-      id: "15E89D7D-7DB8-ED11-8924-34735A9C3F29",
-      nombres: "Paula",
-      apellidos: "Quiroz",
-      correo: "Paula.quiroz@example.com",
-      oPuntoVenta: {
-          id: "D867F053-75B8-ED11-8924-34735A9C3F29",
-          nombre: "Calle 100"
-      }
-  };
 
   constructor(
       protected readonly breakpointObserver: BreakpointObserver,
@@ -37,7 +27,9 @@ export class HomeComponent {
       this.optionsMenu.push({
           menuId: 1,
           title: "Configuración",
-          callback: () => {}
+          callback: () => {
+            this.router.navigate(['/createUser']).then();
+          }
           /* No sé agre la propiedad iconUrl porque no se va a utilizar en esta etapa, si se requiere se debe agregar una url válida*/
       });
 
@@ -78,6 +70,10 @@ export class HomeComponent {
           title: "Aprobaciones",
           callback: () => {}
       });
+  }
+
+  onHome(){
+    this.router.navigate(['/']).then();
   }
 }
 

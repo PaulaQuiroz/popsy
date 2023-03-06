@@ -25,6 +25,16 @@ export class UsuarioPuntoVentaService {
 		});
 	}
 
+	async getByUsuario(idUsuario: string): Promise<UsuarioPuntoVentaEntity[]> {
+		return await this.iUsuarioPuntoVentaRepository.find({
+			where: {
+				usuario: {
+					id: idUsuario	
+				}
+			}
+		});
+	}
+
 	async save(dto: UsuarioPuntoVentaDto): Promise<UsuarioPuntoVentaEntity> {
 		return await this.iUsuarioPuntoVentaRepository.save(await this.getData(dto));
 	}

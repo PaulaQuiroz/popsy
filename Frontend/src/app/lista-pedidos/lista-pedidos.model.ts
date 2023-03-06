@@ -36,6 +36,8 @@ export interface IUserSession {
     correo: string
 
     oPuntoVenta: IPuntoVenta
+
+    oPuntosVenta: IPuntoVenta[]
 }
 
 export interface IPuntoVenta {

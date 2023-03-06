@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Req, UseGuards } from "@nestjs/common";
 import { DistritoDto } from "../dto/distrito.dto";
 import { UsuarioPuntoVentaService } from "../services/usuario-punto-venta.service";
 import { UsuarioPuntoVentaDto, UsuarioPuntoVentaMasivoDto } from "../dto/usuario-punto-venta.dto";
 import { ApiTags } from "@nestjs/swagger";
+import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 
 @ApiTags("usuario-punto-venta")
 @Controller('usuario-punto-venta')
@@ -14,6 +15,19 @@ export class UsuarioPuntoVentaController {
 	@Get("")
 	async getAll() {
 		return this.iUsuarioPuntoVentaService.getAll();
+	}
+
+	@UseGuards(JwtAuthGuard)
+	@Get("usuario")
+	async getByUsuario(@Req() req) {
+		let currentUser = req.user;
+		let oPuntosVenta = (await this.iUsuarioPuntoVentaService.getByUsuario(currentUser.id))
+			.map(oItem => oItem.puntoVenta);
+		return {
+			...currentUser,
+			oPuntosVenta: oPuntosVenta,
+			oPuntoVenta: oPuntosVenta[0]
+		}
 	}
 
 	@Get(":id")

@@ -24,10 +24,7 @@ export class AuthController {
 
         res.cookie("token", oAuth.token, {
             expires: oAuth.expireDate,
-            sameSite: "none",
-            httpOnly: false,
-            secure: false,
-            domain:"*"
+            sameSite: false
         });
 
         res.json({

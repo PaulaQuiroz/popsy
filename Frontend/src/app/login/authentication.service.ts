@@ -22,7 +22,7 @@ export class AuthenticationService {
                 localStorage.setItem(this.tokenKey, oResult.token);
             }
             
-            this.router.navigate(['/pedidos']).then();
+            this.router.navigate(['/']).then();
         }).catch((oError) => callbackError(oError));
     }
 
@@ -42,7 +42,7 @@ export class AuthenticationService {
     }
 
     public isLoggedIn(): boolean {
-        if(window.location.origin.includes("localhost")){
+        if(window.location.origin.includes("localhost:4200")){
             let token = localStorage.getItem(this.tokenKey);
 
             return token != null && token.length > 0;

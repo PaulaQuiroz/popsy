@@ -1,48 +1,5 @@
 <!-- Navbar -->
-<nav class="bg-[#b60050] max-w-[100vw] overflow-x-hidden">
-    <div class="w-[96vw] lg:flex lg:justify-between lg:items-center">
-        <div class="mx-4 flex justify-between items-center mb-8 w-auto lg:my-4">
-            <!-- Logo -->
-            <div class="py-4 w-[25%] md:w-[15%] pt-2 lg:w-28 lg:my-auto lg:h-auto">
-                <img src="./assets/logos/logo-white.png" alt="">
-            </div>
-
-            <!-- Menu Icon -->
-            <button *ngIf="!deviceIsDesktop" [class]="'text-white scale-150 ' + (phoneMenuShow ? 'fixed z-[-1]' : '')"
-                    (click)="phoneMenuShow = !phoneMenuShow">
-                <fa-icon [icon]="faBars"></fa-icon>
-            </button>
-
-            <!-- Menu Icon -->
-            <button *ngIf="!deviceIsDesktop" [class]="'text-white scale-150 '  + (phoneMenuShow ? '' : 'fixed z-[-1]')"
-                    (click)="phoneMenuShow = !phoneMenuShow">
-                <fa-icon [icon]="faXmark"></fa-icon>
-            </button>
-        </div>
-
-        <div *ngIf="deviceIsDesktop" class="text-white">
-            <ul class="flex">
-                <li class="py-4 transition ease-in-out delay-150 hover:scale-105 hover:bg-gray-900/[.5] max-w-[97.5vw] cursor-pointer"
-                    *ngFor="let optionMenu of optionsMenu; let i=index;">
-                <span class="text-xl mx-4 md:text-xl">
-                    {{optionMenu.title}}
-                </span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="text-white max-w-[100vw]" *ngIf="phoneMenuShow && !deviceIsDesktop">
-            <ul>
-                <li class="py-4 transition ease-in-out delay-150 hover:scale-105 hover:bg-gray-900/[.5] max-w-[97.5vw] cursor-pointer "
-                    *ngFor="let optionMenu of optionsMenu; let i=index;">
-                <span class="text-xl ml-8 md:text-3xl">
-                    {{optionMenu.title}}
-                </span>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<app-home></app-home>
 <div class="lg:flex max-w-[100vw] overflow-x-hidden">
     <aside class="fixed z-10 flex lg:relative lg:max-w-[307px] lg:min-h-[83vh]">
         <!-- CONTENT -->
@@ -86,7 +43,15 @@
 
                     <mat-form-field appearance="fill" class="md:mx-2">
                         <mat-label>Punto de venta</mat-label>
-                        <input matInput [value]="_oUserSession.oPuntoVenta.nombre" disabled />
+                        <mat-select required 
+                            [(value)]="_oUserSession.oPuntoVenta"
+                            (selectionChange)="getCategorias();"
+                            [disabled]="_oUserSession.oPuntosVenta.length == 1">
+                            <mat-option *ngFor="let oPuntoVenta of _oUserSession.oPuntosVenta" 
+                            [value]="oPuntoVenta">
+                                {{oPuntoVenta.nombre}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill" class="md:mx-2">
