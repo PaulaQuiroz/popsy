@@ -5,6 +5,7 @@ import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { JwtAuthService } from '../services/jwt-auth.service';
 import * as moment from "moment";
 import { ApiTags } from '@nestjs/swagger';
+import { Get } from '@nestjs/common/decorators';
 
 const ms = require("ms");
 
@@ -31,6 +32,16 @@ export class AuthController {
             ...req.user,
             token: oAuth.token
         });
+    }
+
+    @Get("logout")
+    async logout(@Req() req, @Res() res){
+        res.cookie("token", "", {
+            expires: new Date(),
+            sameSite: false
+        });
+
+        res.redirect("/login")
     }
 
     @Post("current-user")

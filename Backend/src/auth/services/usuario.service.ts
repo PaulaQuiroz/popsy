@@ -36,8 +36,21 @@ export class UsuarioService {
 		});
 	}
 
-	async save(dto: UsuarioDto): Promise<UsuarioEntity> {
+	async save(dto: UsuarioDto): Promise<UsuarioEntity | any> {
 		dto.password = await this.hashPassword(dto.password);
+		let oUsuario = await this.usuarioRepository.findOne({
+			where: {
+				correo: dto.correo
+			}
+		});
+
+		if(oUsuario){
+			return {
+				isError: true,
+				message: "El correo ingresado ya existe"
+			}
+		}
+
 		return {
 			...(await this.usuarioRepository.save(dto)),
 		password: undefined

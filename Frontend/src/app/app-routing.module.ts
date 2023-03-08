@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateUserComponent } from './createUser/create-user/create-user.component';
 import { NoAuthGuard } from './login/no-auth.guard';
 import { HomeComponent } from './home/home.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const routes: Routes = [
     {
@@ -24,7 +25,11 @@ const routes: Routes = [
         component: CreateUserComponent,
         canActivate: [AuthGuard]
     },
- 
+    {
+        path: "editUser",
+        component: EditUserComponent,
+        canActivate: [AuthGuard]
+    },
     {
         path: "pedidos",
         component: ListaPedidosComponent,

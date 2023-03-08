@@ -2,6 +2,9 @@
 <app-home></app-home>
 <div class="lg:flex max-w-[100vw] overflow-x-hidden">
     <aside class="fixed z-10 flex lg:relative lg:max-w-[307px] lg:min-h-[83vh]">
+        <!-- PYTHON -->
+
+        
         <!-- CONTENT -->
         <mat-list [class]="(categoriasMenuShow || deviceIsDesktop? '' : 'sticky left-[-10000] hidden') +
         ' bg-[#b60050] w-[60vw] md:w-[40vw] lg:w-[20vw] transition-all ease-in-out delay-150 duration-1000 p-0 lg:max-w-[307px]'">
@@ -28,6 +31,16 @@
         </button>
     </aside>
     <div>
+
+        <!-- PYTHON -->
+        <form enctype="multipart/form-data" method="post" action="app.py">
+            ingrese su nombre<input type="text" name="pname" id=""/>
+            <input type="submit" value="Hola">
+
+        </form>
+
+        <!-- FORMULARIO INICIAL -->
+        
         <section [class]="(categoriasMenuShow ? 'opacity-20 ' : '') + ' lg:mt-4'">
             <div class="block ml-8 w-full-form lg:m-0">
                 <form class="w-[70%] mx-auto md:w-[80%] md:flex md:justify-center" [formGroup]="oUserInfoGroup">

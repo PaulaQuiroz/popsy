@@ -26,7 +26,24 @@ export class BackendService {
     postRequest(path: string, dataSave: any){
         return new Promise((resolve, reject) => {
             this.httpClient.post(this.domain + this.prefix + path, dataSave).subscribe((oResult: any) => {
-                resolve(oResult);
+                if(oResult.isError){
+                    reject(oResult);
+                } else {
+                    resolve(oResult);
+                }
+            })
+        });
+    }
+
+    postRequestCatch(path: string, dataSave: any){
+        return new Promise((resolve, reject) => {
+            this.httpClient.post(this.domain + this.prefix + path, dataSave).subscribe({
+                next: (oResult: any) => {
+                    resolve(oResult);
+                },
+                error: (oError) => {
+                    reject(oError);
+                }
             })
         });
     }

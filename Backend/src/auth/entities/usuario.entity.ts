@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({
@@ -39,8 +40,9 @@ export class UsuarioEntity {
 		type: "varchar",
 		length: 255,
 		name: "password",
-		nullable: false
+		nullable: false,
 	})
+	@Exclude({toPlainOnly: false})
 	password: string;
 
 	@CreateDateColumn({

@@ -25,6 +25,16 @@ export class UsuarioRolService {
 		});
 	}
 
+	async getByUsuario(idUsuario: string): Promise<UsuarioRolEntity[]> {
+		return await this.usuarioRolRepository.find({
+			where: {
+				usuario: {
+					id: idUsuario
+				}
+			}
+		});
+	}
+
 	async save(dto: UsuarioRolDto): Promise<UsuarioRolEntity> {
 		return this.usuarioRolRepository.save(await this.getData(dto));
 	}

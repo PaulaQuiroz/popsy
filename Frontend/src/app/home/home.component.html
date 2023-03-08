@@ -1,19 +1,19 @@
 <!-- Navbar -->
-<nav class="bg-[#b60050] max-w-[100vw] overflow-x-hidden">
+<!--<nav class="bg-[#b60050] max-w-[100vw] overflow-x-hidden">
     <div class="w-[96vw] lg:flex lg:justify-between lg:items-center">
         <div class="mx-4 flex justify-between items-center mb-8 w-auto lg:my-4">
-            <!-- Logo -->
+          
             <div (click)="onHome()" class="py-4 w-[25%] md:w-[15%] pt-2 lg:w-28 lg:my-auto lg:h-auto">
                 <img src="./assets/logos/logo-white.png" alt="">
             </div>
 
-            <!-- Menu Icon -->
+            
             <button *ngIf="!deviceIsDesktop" [class]="'text-white scale-150 ' + (phoneMenuShow ? 'fixed z-[-1]' : '')"
                     (click)="phoneMenuShow = !phoneMenuShow">
                 <fa-icon [icon]="faBars"></fa-icon>
             </button>
 
-            <!-- Menu Icon -->
+            
             <button *ngIf="!deviceIsDesktop" [class]="'text-white scale-150 '  + (phoneMenuShow ? '' : 'fixed z-[-1]')"
                     (click)="phoneMenuShow = !phoneMenuShow">
                 <fa-icon [icon]="faXmark"></fa-icon>
@@ -23,11 +23,10 @@
         <div *ngIf="deviceIsDesktop" class="text-white">
             <ul class="flex">
                 <li class="py-4 transition ease-in-out delay-150 hover:scale-105 hover:bg-gray-900/[.5] max-w-[97.5vw] cursor-pointer"
-                    *ngFor="let optionMenu of optionsMenu; let i=index;">
-                <span (click)="optionMenu.callback()" 
-                    class="text-xl mx-4 md:text-xl">
-                    {{optionMenu.title}}
-                </span>
+                    *ngFor="let optionMenu of optionsMenu; let i=index;" (click)="optionMenu.callback()">
+                    <span class="text-xl mx-4 md:text-xl">
+                        {{optionMenu.title}}
+                    </span>
                 </li>
             </ul>
         </div>
@@ -44,7 +43,14 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav>-->
+<div class="bg-[#b60050] flex justify-around items-center">
+    <div (click)="onHome()" class="py-4 w-[25%] md:w-[15%] pt-2 lg:w-28 lg:my-auto lg:h-auto">
+        <img src="./assets/logos/logo-white.png" alt="">
+    </div>
+    <p-menubar [model]="items" class="bg-[#b60050]"></p-menubar>
+</div>
+
 <div class="lg:flex max-w-[100vw] overflow-x-hidden">
    
 </div>

@@ -23,6 +23,16 @@ export class DistritoService {
 		});
 	}
 
+	async getByOrganizacionVenta(idOrganizacionVenta: string): Promise<DistritoEntity[]> {
+		return await this.idistritoRepository.find({
+			where: {
+				organizacionVenta: {
+					id: idOrganizacionVenta
+				}
+			}
+		});
+	}
+
 	async save(dto: DistritoDto): Promise<DistritoEntity> {
 		return await this.idistritoRepository.save(await this.getData(dto));
 	}

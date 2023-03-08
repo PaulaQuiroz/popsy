@@ -33,8 +33,12 @@
 
 h1 {
 
-  margin-inline-start: 17%;
-  padding: 40px;
+  margin-inline-start: 12%;
+  padding: 10px;
+  font-weight:bold;
+  font-size:2em;
+  color:#7b0f53;
+  font-family:'Lucida Sans','Verdana','Monaco';
 }
 
 
@@ -47,7 +51,7 @@ h1 {
 .custom-form {
   min-width: 300px;
   max-width: 40%;
-  margin: 0px auto;
+ 
   background: rgba(255, 255, 255, 0.15);
   padding: 2rem 3rem;
   margin: auto;

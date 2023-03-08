@@ -1,0 +1,37 @@
+.p-menubar{
+    background: transparent!important;
+    border: 0;
+}
+.p-menubar:hover{
+    background: transparent!important;
+    border: 0;
+}
+
+.p-menubar a{
+    color: white!important;
+}
+
+.p-menubar a:hover{
+    background: transparent!important;
+}
+
+.p-menubar p-menubarsub ul li{
+    color: white!important;
+    background-color: #b60050;
+}
+.p-menubar p-menubarsub ul li a:hover{
+    background: transparent;
+}
+
+.p-menubar p-menubarsub ul li a span{
+    color: white!important;
+}
+
+.p-menubar .p-menuitem.p-menuitem-active > .p-menuitem-link {
+    background: rgb(17, 24, 39, 0.5)!important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link, .p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link:not(.p-disabled):hover {
+    background: transparent!important;
+    border: 0;
+}

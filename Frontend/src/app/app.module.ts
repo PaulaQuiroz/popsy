@@ -21,6 +21,9 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { LoginComponent } from './login/login.component';
 import { CreateUserComponent } from './createUser/create-user/create-user.component';
 import { HomeComponent } from './home/home.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import {MenubarModule} from 'primeng/menubar';
+
 
 @NgModule({
     declarations: [
@@ -30,7 +33,8 @@ import { HomeComponent } from './home/home.component';
         DetallePedidoDialogComponent,
         LoginComponent,
         CreateUserComponent,
-        HomeComponent
+        HomeComponent,
+        EditUserComponent
     ],
     imports: [
         BrowserModule,
@@ -47,8 +51,8 @@ import { HomeComponent } from './home/home.component';
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
-        FormsModule
-        
+        FormsModule,
+        MenubarModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -16,6 +16,11 @@ export class DistritoController {
 		return this.iDistritoService.getAll();
 	}
 
+	@Get("organizacion-venta/:id")
+	async getByOrganizacionVenta(@Param("id") id: string) {
+		return this.iDistritoService.getByOrganizacionVenta(id);
+	}
+
 	@Get(":id")
 	async getById(@Param("id") id: string) {
 		return this.iDistritoService.getById(id);

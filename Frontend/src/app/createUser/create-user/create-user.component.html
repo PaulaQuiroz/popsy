@@ -2,8 +2,9 @@
     <!--<img src=".././../assets/img/bg-back.jpg"
         style="position: absolute; margin:0; right: 0; top: 0; z-index: -90; opacity: 0.95">
     -->
-
-    <div class="register">
+    <app-home></app-home>
+    <div class="register pt-8">
+      
         <form class="custom-form" [formGroup]="oFormGroup" (ngSubmit)="createUser()">
             <h1>Creación de Usuario</h1>
             <div class="logo">
@@ -14,60 +15,150 @@
                     <mat-label>Nombres</mat-label>
                     <input matInput formControlName="nombres">
                 </mat-form-field>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['nombres'].errors &&
+                      oFormGroup.controls['nombres'].hasError('required')">
+                        Debe diligenciar el nombre
+                    </span>
+                </div>
             </div>
             <div>
                 <mat-form-field appearance="fill" class="w-full">
                     <mat-label>Apellidos</mat-label>
                     <input matInput formControlName="apellidos">
                 </mat-form-field>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['apellidos'].errors &&
+                      oFormGroup.controls['apellidos'].hasError('required')">
+                        Debe diligenciar el apellidos
+                    </span>
+                </div>
             </div>
             <div>
                 <mat-form-field appearance="fill" class="w-full">
                     <mat-label>Correo</mat-label>
                     <input matInput formControlName="correo">
                 </mat-form-field>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['correo'].errors &&
+                      oFormGroup.controls['correo'].hasError('required')">
+                        Debe diligenciar el correo
+                    </span>
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['correo'].errors &&
+                      oFormGroup.controls['correo'].hasError('email')">
+                        Debe ingresar un correo valido
+                    </span>
+                </div>
             </div>
             
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Rol</mat-label>
-                <mat-select formControlName="rol">
-                    <mat-option *ngFor="let oRolOption of oRolOptions" 
-                    [value]="oRolOption.id"
-                    >
-                        {{oRolOption.nombre}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Rol</mat-label>
+                    <mat-select formControlName="rol">
+                        <mat-option *ngFor="let oRolOption of oRolOptions" 
+                        [value]="oRolOption.id"
+                        >
+                            {{oRolOption.nombre}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['rol'].errors &&
+                      oFormGroup.controls['rol'].hasError('required')">
+                        Debe seleccionar un rol valido
+                    </span>
+                </div>
+            </div>
+            
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Organizacion de Ventas</mat-label>
+                    <mat-select formControlName="organizacionVentas"
+                        (selectionChange)="getDistritos($event, oFormGroup.controls['organizacionVentas'].value)">
+                        <mat-option *ngFor="let oOrganizacionVentasOption of oOrganizacionVentasOptions" 
+                        [value]="oOrganizacionVentasOption.id"
+                        >
+                            {{oOrganizacionVentasOption.codigo}} - {{oOrganizacionVentasOption.nombre}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['organizacionVentas'].errors &&
+                      oFormGroup.controls['organizacionVentas'].hasError('required')">
+                        Debe seleccionar una organización de venta valida
+                    </span>
+                </div>
+            </div>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Distrito</mat-label>
-                <mat-select formControlName="distrito"
-                    (selectionChange)="getPuntosVenta($event, oFormGroup.controls['distrito'].value)">
-                    <mat-option *ngFor="let oDistritosOption of oDistritosOptions" 
-                    [value]="oDistritosOption.id"
-                    >
-                        {{oDistritosOption.codigo}} - {{oDistritosOption.nombre}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Distrito</mat-label>
+                    <mat-select formControlName="distrito"
+                        (selectionChange)="getPuntosVenta($event, oFormGroup.controls['distrito'].value)">
+                        <mat-option *ngFor="let oDistritosOption of oDistritosOptions" 
+                        [value]="oDistritosOption.id"
+                        >
+                            {{oDistritosOption.codigo}} - {{oDistritosOption.nombre}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['distrito'].errors &&
+                      oFormGroup.controls['distrito'].hasError('required')">
+                        Debe seleccionar un distrito valido
+                    </span>
+                </div>
+            </div>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Puntos Venta</mat-label>
-                <mat-select (selectionChange)="onChangePuntoVenta()"
-                    formControlName="puntoVenta" 
-                    multiple>
-                    <mat-option *ngFor="let oPuntoVentaOptions of oPuntosVentaOptions" 
-                    [value]="oPuntoVentaOptions.id">
-                        {{oPuntoVentaOptions.codigo}} - {{oPuntoVentaOptions.nombre}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Puntos Venta</mat-label>
+                    <mat-select (selectionChange)="onChangePuntoVenta()"
+                        formControlName="puntoVenta" 
+                        multiple>
+                        <mat-option *ngFor="let oPuntoVentaOptions of oPuntosVentaOptions" 
+                        [value]="oPuntoVentaOptions.id">
+                            {{oPuntoVentaOptions.codigo}} - {{oPuntoVentaOptions.nombre}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['puntoVenta'].errors &&
+                      oFormGroup.controls['puntoVenta'].hasError('required')">
+                        Debe seleccionar un punto de venta valido
+                    </span>
+                </div>
+            </div>
+            
 
             <div>
                 <mat-form-field appearance="fill" class="w-full">
                     <mat-label>Contraseña</mat-label>
                     <input type="password" matInput formControlName="password">
                 </mat-form-field>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['password'].errors &&
+                      oFormGroup.controls['password'].hasError('required')">
+                      Debe diligenciar la contraseña
+                    </span>
+                </div>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['password'].errors &&
+                      oFormGroup.controls['password'].hasError('minlength')">
+                        La contraseña debe contener minimo 8 caracteres
+                    </span>
+                </div>
             </div>
 
             <div>
@@ -75,6 +166,20 @@
                     <mat-label>Repetir Contraseña</mat-label>
                     <input type="password" matInput formControlName="repeatPassword">
                 </mat-form-field>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['repeatPassword'].errors &&
+                      oFormGroup.controls['repeatPassword'].hasError('required')">
+                      Debe diligenciar la contraseña
+                    </span>
+                </div>
+                <div class="text-center w-full mb-4">
+                    <span class="text-red-900"
+                     *ngIf="oFormGroup.controls['repeatPassword'].errors &&
+                      oFormGroup.controls['repeatPassword'].hasError('minlength')">
+                        La contraseña debe contener minimo 8 caracteres
+                    </span>
+                </div>
             </div>
             
             <button type="submit" class="btnSubmit">Crear Usuario</button>

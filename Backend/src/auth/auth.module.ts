@@ -25,12 +25,6 @@ const ms = require("ms")
 		PassportModule,
 		JwtModule.registerAsync({
 			useFactory: () => {
-				console.log({
-					secret: process.env.API_AUTH_SECRET_JWT,
-					signOptions: {
-						expiresIn: ms(process.env.API_CONFIG_AUTH_DURATION_JWT)
-					}
-				})
 				return {
 					secret: process.env.API_AUTH_SECRET_JWT,
 					signOptions: {
